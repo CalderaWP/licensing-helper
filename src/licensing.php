@@ -17,22 +17,23 @@ class licensing {
 	/**
 	 * Create licensing
 	 *
-	 * @param array $params Must pass 'name', 'slug', 'url', 'version', 'key_store', & 'file'
+	 * @param array $plugin Must pass 'name', 'slug', 'url', 'version', 'key_store', & 'file'
 	 */
-	public function __construct( $params ) {
+	public function __construct( $plugin ) {
 
 		// check if licence manager is installed
-		if( !class_exists( 'CalderaWP_License_Manager' ) && empty( $_GET['action'] ) ){
+		if( ! class_exists( 'CalderaWP_License_Manager' ) && empty( $_GET[ 'action' ] ) ){
 			$plugins = get_plugins();
 			$found = false;
-			foreach( $plugins as $plugin_file=>$plugin ){
-				if( $plugin['Name'] == 'CalderaWP License Manager' ){
+			foreach( $plugins as $plugin_file => $a_plugin ){
+				if( $a_plugin['Name'] == 'CalderaWP License Manager' ){
 					$found = $plugin_file;
 					break;
 
 				}
 
 			}
+
 			// oi! need manager
 			if ( is_admin() ) {
 
@@ -90,7 +91,12 @@ class licensing {
 					include_once CAEQ_PATH . 'vendor/calderawp/dismissible-notice/src/Caldera_Warnings_Dismissible_Notice.php';
 				}
 
-				$message = __( sprintf( 'Please activate you %1s licesense using <a href="%1s">CalderaWP License Manager</a>.', self_admin_url( 'options-general.php?page=calderawp_license_manager' ) ) );
+				$message = __(
+					sprintf( 'Please activate your %1s licesense using <a href="%1s">CalderaWP License Manager</a>.',
+						$plugin[ 'name' ],
+						self_admin_url( 'options-general.php?page=calderawp_license_manager' )
+					)
+				);
 				echo \Caldera_Warnings_Dismissible_Notice::notice( $message, true, 'activate_plugins' );
 
 			}
