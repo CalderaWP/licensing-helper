@@ -92,7 +92,7 @@ class licensing {
 				}
 
 				$message = __(
-					sprintf( 'Please activate your %1s licesense using <a href="%1s">CalderaWP License Manager</a>.',
+					sprintf( 'Please activate your %1s license using <a href="%1s">CalderaWP License Manager</a>.',
 						$plugin[ 'name' ],
 						self_admin_url( 'options-general.php?page=calderawp_license_manager' )
 					)
