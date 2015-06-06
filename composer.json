@@ -1,9 +1,9 @@
 {
-    "name": "calderawp/edd-licensing",
-    "description": "Licensing helper classes for EDD software licensing.",
+    "name": "calderawp/licensing-helper",
+    "description": "Helper class for CalderaWP Licensing Manager",
     "type": "library",
     "keywords": [
-        "wordpress", "easy-digital-downloads"
+        "wordpress"
     ],
     "license": "GPL-2.0+",
     "authors": [
