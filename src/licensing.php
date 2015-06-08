@@ -31,16 +31,16 @@ class licensing {
 					break;
 
 				}
-
 			}
 
 			// oi! need manager
+			if ( is_admin() || defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+				include_once dirname( dirname( dirname( __FILE__ ) ) ) . '/dismissible-notice/src/functions.php';
+			}
+
+
 			if ( is_admin() ) {
 
-				//BIG nope nope nope!
-				if( ! class_exists( 'Caldera_Warnings_Dismissible_Notice' ) ){
-					include_once CAEQ_PATH . 'vendor/calderawp/dismissible-notice/src/Caldera_Warnings_Dismissible_Notice.php';
-				}
 
 				if( ! empty( $found ) ){
 
@@ -51,7 +51,7 @@ class licensing {
 								wp_nonce_url( self_admin_url( 'plugins
 						.php?action=activate&plugin=' . urlencode( $found ) ), 'activate-plugin_' . $found )
 							), 'caldera-easy-queries' );
-					echo \Caldera_Warnings_Dismissible_Notice::notice( $message, true, 'activate_plugins' );
+					echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins' );
 					return;
 
 				}else{
@@ -63,7 +63,7 @@ class licensing {
 							$plugin[ 'name' ],
 							wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=calderawp-license-manager' ), 'install-plugin_calderawp-license-manager' )
 						), 'caldera-easy-queries' );
-					echo \Caldera_Warnings_Dismissible_Notice::notice( $message, true, 'activate_plugins' );
+					echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins' );
 
 				}
 
@@ -86,18 +86,13 @@ class licensing {
 			cwp_license_manager_register_licensed_product( $product_params );
 			if( ! cwp_license_manager_is_product_licensed( $product_params['name'] ) && ( empty( $_GET['page'] ) || $_GET['page'] !== 'calderawp_license_manager' ) ){
 
-				// notice to activate license
-				if( !class_exists( 'Caldera_Warnings_Dismissible_Notice' ) ){
-					include_once CAEQ_PATH . 'vendor/calderawp/dismissible-notice/src/Caldera_Warnings_Dismissible_Notice.php';
-				}
-
 				$message = __(
 					sprintf( 'Please activate your %1s license using <a href="%1s">CalderaWP License Manager</a>.',
 						$plugin[ 'name' ],
 						self_admin_url( 'options-general.php?page=calderawp_license_manager' )
 					)
 				);
-				echo \Caldera_Warnings_Dismissible_Notice::notice( $message, true, 'activate_plugins' );
+				echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins' );
 
 			}
 		}
