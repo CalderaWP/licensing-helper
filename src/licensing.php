@@ -21,6 +21,10 @@ class licensing {
 	 */
 	public function __construct( $plugin ) {
 
+		if ( is_admin() || defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			include_once dirname( dirname( dirname( __FILE__ ) ) ) . '/dismissible-notice/src/functions.php';
+		}
+
 		// check if licence manager is installed
 		if( ! class_exists( 'CalderaWP_License_Manager' ) && empty( $_GET[ 'action' ] ) ){
 			$plugins = get_plugins();
@@ -32,12 +36,6 @@ class licensing {
 
 				}
 			}
-
-			// oi! need manager
-			if ( is_admin() || defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-				include_once dirname( dirname( dirname( __FILE__ ) ) ) . '/dismissible-notice/src/functions.php';
-			}
-
 
 			if ( is_admin() ) {
 
