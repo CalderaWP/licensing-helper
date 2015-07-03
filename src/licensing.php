@@ -49,7 +49,7 @@ class licensing {
 								wp_nonce_url( self_admin_url( 'plugins
 						.php?action=activate&plugin=' . urlencode( $found ) ), 'activate-plugin_' . $found )
 							), 'caldera-easy-queries' );
-					echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins' );
+					echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins', $plugin[ 'key_store' ] . '_nag' );
 					return;
 
 				}else{
@@ -61,7 +61,7 @@ class licensing {
 							$plugin[ 'name' ],
 							wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=calderawp-license-manager' ), 'install-plugin_calderawp-license-manager' )
 						), 'caldera-easy-queries' );
-					echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins' );
+					echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins', $plugin[ 'key_store' ] . '_nag' );
 
 				}
 
@@ -90,7 +90,7 @@ class licensing {
 						self_admin_url( 'options-general.php?page=calderawp_license_manager' )
 					)
 				);
-				echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins' );
+				echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins', $plugin[ 'key_store' ] . '_nag' );
 
 			}
 		}
