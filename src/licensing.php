@@ -37,7 +37,7 @@ class licensing {
 				}
 			}
 
-			if ( is_admin() ) {
+			if ( is_admin() && empty( $plugin['silent'] ) ) {
 
 
 				if( ! empty( $found ) ){
@@ -82,7 +82,7 @@ class licensing {
 			);
 
 			cwp_license_manager_register_licensed_product( $product_params );
-			if( ! cwp_license_manager_is_product_licensed( $product_params['name'] ) && ( empty( $_GET['page'] ) || $_GET['page'] !== 'calderawp_license_manager' ) ){
+			if( ! cwp_license_manager_is_product_licensed( $product_params['name'] ) && ( empty( $_GET['page'] ) || $_GET['page'] !== 'calderawp_license_manager' ) && empty( $plugin['silent'] ) ){
 
 				$message = __(
 					sprintf( 'Please activate your %1s license using <a href="%1s">CalderaWP License Manager</a>.',
