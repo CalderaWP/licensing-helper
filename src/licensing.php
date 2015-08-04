@@ -27,6 +27,7 @@ class licensing {
 
 		// check if licence manager is installed
 		if( ! class_exists( 'CalderaWP_License_Manager' ) && empty( $_GET[ 'action' ] ) ){
+			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 			$plugins = get_plugins();
 			$found = false;
 			foreach( $plugins as $plugin_file => $a_plugin ){
