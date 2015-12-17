@@ -58,7 +58,7 @@ class licensing {
 					// not installed
 					$message = __(
 						sprintf(
-							'To activate your %1s license, you must intall CalderaWP License Manager. <a href="%2s">Install Now</a>',
+							'To activate your %1s license, you must install CalderaWP License Manager. <a href="%2s">Install Now</a>',
 							$plugin[ 'name' ],
 							wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=calderawp-license-manager' ), 'install-plugin_calderawp-license-manager' )
 						), 'caldera-easy-queries' );
