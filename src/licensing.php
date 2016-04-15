@@ -50,19 +50,25 @@ class licensing {
 								wp_nonce_url( self_admin_url( 'plugins
 						.php?action=activate&plugin=' . urlencode( $found ) ), 'activate-plugin_' . $found )
 							), 'caldera-easy-queries' );
-					echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins', $plugin[ 'key_store' ] . '_nag' );
+						if( function_exists( 'caldera_warnings_dismissible_notice' ) ){
+							echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins', $plugin[ 'key_store' ] . '_nag' );
+						}
 					return;
 
 				}else{
-
-					// not installed
-					$message = __(
+					if( function_exists( 'caldera_warnings_dismissible_notice' ) ){
+						// not installed
+						$message = __(
 						sprintf(
 							'To activate your %1s license, you must install CalderaWP License Manager. <a href="%2s">Install Now</a>',
 							$plugin[ 'name' ],
 							wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=calderawp-license-manager' ), 'install-plugin_calderawp-license-manager' )
 						), 'caldera-easy-queries' );
-					echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins', $plugin[ 'key_store' ] . '_nag' );
+						
+						echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins', $plugin[ 'key_store' ] . '_nag' );
+					}
+
+					
 
 				}
 
@@ -91,8 +97,9 @@ class licensing {
 						self_admin_url( 'options-general.php?page=calderawp_license_manager' )
 					)
 				);
-				echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins', $plugin[ 'key_store' ] . '_nag' );
-
+				if( function_exists( 'caldera_warnings_dismissible_notice' ) ){
+					echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins', $plugin[ 'key_store' ] . '_nag' );
+				}
 			}
 		}
 
