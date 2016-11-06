@@ -94,8 +94,7 @@ class licensing {
 				$message = __(
 					sprintf( 'Please activate your %1s license using <a href="%1s">CalderaWP License Manager</a>.',
 						$plugin[ 'name' ],
-						self_admin_url( 'options-general.php?page=calderawp_license_manager' )
-					)
+						add_query_arg( 'page', 'calderawp_license_manager', self_admin_url( 'wp-admin/admin.php' ) )					)
 				);
 				if( function_exists( 'caldera_warnings_dismissible_notice' ) ){
 					echo caldera_warnings_dismissible_notice( $message, true, 'activate_plugins', $plugin[ 'key_store' ] . '_nag' );
